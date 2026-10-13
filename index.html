@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rotina e Estudos</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--muted:#6b6b70;--line:#e4e2dc;--accent:#2f6f5e;--accent-soft:#e3efe9;--now:#fff4d6;--now-ink:#7a5600}
+@media (prefers-color-scheme:dark){:root{--bg:#121314;--card:#1b1c1e;--ink:#ececee;--muted:#9a9aa0;--line:#2c2d30;--accent:#6fc2a6;--accent-soft:#1f2e29;--now:#3a3018;--now-ink:#f2cf7c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:28px 16px 8px;max-width:760px;margin:0 auto}
+h1{margin:0;font-size:1.6rem;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:4px 0 0}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav div{max-width:760px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+nav a{flex:none;text-decoration:none;color:var(--ink);font-size:.9rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+main{max-width:760px;margin:0 auto;padding:8px 16px 48px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0;scroll-margin-top:64px}
+h2{margin:0 0 10px;font-size:1.2rem}
+h3{margin:16px 0 6px;font-size:1rem;color:var(--accent)}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:20px}
+li{margin:3px 0}
+.today{background:var(--accent-soft);border-radius:10px;padding:12px 14px;margin-bottom:6px}
+.today b{color:var(--accent)}
+.row{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 8px;border-bottom:1px solid var(--line);border-radius:8px}
+.row:last-child{border-bottom:0}
+.row .t{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.92rem}
+.row .g{display:block;color:var(--muted);font-size:.85rem}
+.row.now{background:var(--now)}
+.row.now .t{color:var(--now-ink);font-weight:600}
+.day{border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0}
+.day.is-today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.day .h{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.tag{font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.tag.off{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.day dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.93rem}
+.day dt{color:var(--muted)}
+.day dd{margin:0}
+.flow{font-weight:600;color:var(--accent)}
+.check li{list-style:none;margin-left:-20px}
+.check input{margin-right:8px;accent-color:var(--accent)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:0 16px 32px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Rotina e Estudos</h1>
+  <p class="sub">Turno noturno · sono logo ao chegar · academia à tarde · inglês em casa</p>
+</header>
+<nav><div>
+  <a href="#hoje">Hoje</a><a href="#rotina">Rotina</a><a href="#semana">Semana</a><a href="#python">Python</a><a href="#trajetos">Trajetos</a><a href="#sono">Sono e treino</a><a href="#comecar">Como começar</a><a href="#domingo">Domingo</a>
+</div></nav>
+<main>
+
+<section id="hoje">
+  <h2>Hoje</h2>
+  <div class="today" id="todayBox"></div>
+</section>
+
+<section id="rotina">
+  <h2>Rotina diária</h2>
+  <p>Nos dias sem treino (quarta, sábado e domingo), o horário da academia fica livre para descanso.</p>
+  <div id="routine"></div>
+</section>
+
+<section id="semana">
+  <h2>Plano semanal</h2>
+  <p>Em casa, o estudo profundo é todo de inglês, com uma habilidade por dia. Python fica para as horas livres no trabalho.</p>
+  <div id="week"></div>
+  <p>Todo dia: listening em inglês no trajeto. Os flashcards da volta podem misturar vocabulário de inglês e conceitos de Python.</p>
+  <p><b>Meta de inglês:</b> fazer um teste de nível agora (o EF SET é gratuito e online) e repetir a cada dois meses.</p>
+</section>
+
+<section id="python">
+  <h2>Trilha de Python</h2>
+  <p>Nas horas livres do trabalho, em rodízio: <span class="flow">POO → FastAPI → Banco de dados → IA → Projeto</span>. A cada noite com tempo livre, estude o próximo tema, a partir do tópico onde parou.</p>
+  <h3>POO</h3>
+  <ol><li>Classes, atributos e métodos</li><li>Encapsulamento e propriedades</li><li>Herança e composição</li><li>Dataclasses e type hints</li><li>Organizar o código do projeto em classes e módulos</li></ol>
+  <h3>FastAPI</h3>
+  <ol><li>Rotas, parâmetros e respostas</li><li>Validação com Pydantic</li><li>Organização em routers</li><li>Injeção de dependências</li><li>Tratamento de erros e testes com pytest</li></ol>
+  <h3>Banco de dados</h3>
+  <ol><li>SQL básico: SELECT, JOIN, GROUP BY</li><li>Modelagem de tabelas</li><li>SQLAlchemy (modelos e sessões)</li><li>Migrações com Alembic</li><li>Conectar o banco às rotas da API</li></ol>
+  <h3>IA</h3>
+  <ol><li>Chamar uma API de LLM a partir do Python</li><li>Prompts estruturados e saída em JSON</li><li>Embeddings e busca por similaridade</li><li>RAG simples sobre seus próprios documentos</li><li>Expor a IA como um endpoint da API</li></ol>
+  <h3>Projeto</h3>
+  <p>Juntar o que foi estudado nos temas anteriores num projeto real, como o Sherlock ou o Polaris.</p>
+</section>
+
+<section id="trajetos">
+  <h2>Trajetos</h2>
+  <h3>Volta (manhã)</h3>
+  <ol><li>Flashcards nos primeiros 20 a 25 minutos, enquanto ainda está alerta.</li><li>Depois, inglês em áudio ou descanso, conforme o cansaço.</li></ol>
+  <h3>Ida (noite)</h3>
+  <ul><li>Livre: listening de inglês, aula em vídeo de Python ou descanso.</li></ul>
+  <p><b>Ferramentas:</b> plugin Spaced Repetition do Obsidian ou Anki. Baixe áudios e vídeos antes, para não depender de sinal.</p>
+</section>
+
+<section id="sono">
+  <h2>Sono e treino</h2>
+  <ul>
+    <li><b>Escuro e silêncio:</b> cortina blackout ou máscara, tampão de ouvido, celular no silencioso.</li>
+    <li><b>Cafeína:</b> cortar nas últimas 5 a 6 horas do turno.</li>
+    <li><b>Chegada:</b> ir direto para o quarto depois do lanche, sem ficar no celular.</li>
+    <li><b>Lanche pré-treino:</b> comer algo leve ao acordar para não treinar em jejum.</li>
+    <li><b>Refeição pós-treino:</b> completa, é ela que sustenta o estudo e o início do turno.</li>
+    <li><b>Folgas:</b> manter o horário de sono o mais próximo possível do normal.</li>
+  </ul>
+</section>
+
+<section id="comecar">
+  <h2>Como começar</h2>
+  <ul>
+    <li><b>Comece pela metade:</b> nas duas primeiras semanas, 3 treinos e cerca de 45 min de estudo.</li>
+    <li><b>Versão mínima:</b> em dia ruim, só os flashcards no trajeto já contam.</li>
+    <li><b>O sono vem primeiro:</b> se dormiu mal, corte o treino ou o estudo, nunca o sono.</li>
+    <li><b>Refeições prontas:</b> prepare no fim de semana.</li>
+    <li><b>Mochila da academia pronta na véspera.</b></li>
+    <li><b>Fim de semana protegido:</b> sábado é descanso de verdade, sem culpa.</li>
+    <li><b>Avaliação em duas semanas:</b> está acordando descansado? O estudo rende? Ajuste.</li>
+  </ul>
+</section>
+
+<section id="domingo">
+  <h2>Revisão de domingo</h2>
+  <ul class="check" id="checklist"></ul>
+</section>
+</main>
+<footer>Atualizado em 13/10/2026</footer>
+
+<script>
+const routine=[
+ ["Volta (~1h30)","Flashcards (20–25 min) + inglês em áudio ou descanso","Revisão e fixação",null],
+ ["08:20 – 09:00","Chegada, lanche leve, quarto escuro","Preparar o sono",[500,540]],
+ ["09:00 – 16:00","Sono (7h)","Descanso",[540,960]],
+ ["16:00 – 16:30","Acordar, café e lanche pré-treino","Despertar",[960,990]],
+ ["16:30 – 17:45","Academia (Seg/Ter/Qui/Sex)","Saúde e disposição",[990,1065]],
+ ["17:45 – 18:15","Banho e refeição","Recuperação",[1065,1095]],
+ ["18:15 – 19:40","Estudo de inglês (1h25)","Aprendizado",[1095,1180]],
+ ["19:40 – 19:45","Resumo do dia no Obsidian","Fixação",[1180,1185]],
+ ["19:45 – 20:30","Jantar e saída para o trabalho","Preparação",[1185,1230]],
+ ["Ida (~1h30)","Aula em vídeo de Python, inglês ou descanso","Uso livre",null]
+];
+const week=[ // index 0 = domingo
+ {d:"Domingo",t:false,en:"Revisão geral, flashcards e planejamento",py:"—"},
+ {d:"Segunda",t:true,en:"Vocabulário + gramática",py:"POO"},
+ {d:"Terça",t:true,en:"Listening: série ou podcast com transcrição, shadowing",py:"FastAPI"},
+ {d:"Quarta",t:false,en:"Speaking com outra pessoa: aula ou parceiro de conversação",py:"Banco de dados"},
+ {d:"Quinta",t:true,en:"Reading + writing: texto curto e um parágrafo escrito",py:"IA"},
+ {d:"Sexta",t:true,en:"Speaking sozinho (gravar-se falando) + revisão da semana",py:"Projeto prático"},
+ {d:"Sábado",t:false,en:"Conversação leve ou descanso",py:"—"}
+];
+const checks=["Revisar os flashcards pendentes","Reler os resumos diários no Obsidian","Anotar em que ponto parou no rodízio de Python","Definir os tópicos de inglês da próxima semana","Anotar o progresso de inglês da semana","Avaliar o sono: acordou descansado na maioria dos dias?"];
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const now=new Date(),mins=now.getHours()*60+now.getMinutes(),dow=now.getDay();
+document.getElementById("routine").innerHTML=routine.map(r=>{
+ const on=r[3]&&mins>=r[3][0]&&mins<r[3][1];
+ return `<div class="row${on?" now":""}"><span class="t">${r[0]}</span><span>${esc(r[1])}<span class="g">${r[2]}${on?" · agora":""}</span></span></div>`}).join("");
+const order=[1,2,3,4,5,6,0];
+document.getElementById("week").innerHTML=order.map(i=>{const w=week[i];
+ return `<div class="day${i===dow?" is-today":""}"><div class="h"><span>${w.d}${i===dow?" (hoje)":""}</span><span class="tag${w.t?"":" off"}">${w.t?"Treino":"Sem treino"}</span></div><dl><dt>Inglês</dt><dd>${esc(w.en)}</dd><dt>Python</dt><dd>${esc(w.py)}</dd></dl></div>`}).join("");
+const w=week[dow];
+document.getElementById("todayBox").innerHTML=`<b>${w.d}</b> · ${w.t?"Academia 16:30 – 17:45":"Sem treino"}<br>Inglês: ${esc(w.en)}<br>Python no trabalho: ${esc(w.py)}`;
+let saved={};try{saved=JSON.parse(localStorage.getItem("checks")||"{}")}catch(e){}
+const ul=document.getElementById("checklist");
+ul.innerHTML=checks.map((c,i)=>`<li><label><input type="checkbox" data-i="${i}"${saved[i]?" checked":""}>${c}</label></li>`).join("");
+ul.addEventListener("change",e=>{saved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("checks",JSON.stringify(saved))}catch(err){}});
+</script>
+</body>
+</html>
