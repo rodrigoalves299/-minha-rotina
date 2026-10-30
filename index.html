@@ -3,169 +3,197 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rotina e Estudos</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Meu Dia</title>
 <style>
-:root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--muted:#6b6b70;--line:#e4e2dc;--accent:#2f6f5e;--accent-soft:#e3efe9;--now:#fff4d6;--now-ink:#7a5600}
-@media (prefers-color-scheme:dark){:root{--bg:#121314;--card:#1b1c1e;--ink:#ececee;--muted:#9a9aa0;--line:#2c2d30;--accent:#6fc2a6;--accent-soft:#1f2e29;--now:#3a3018;--now-ink:#f2cf7c}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{padding:28px 16px 8px;max-width:760px;margin:0 auto}
-h1{margin:0;font-size:1.6rem;letter-spacing:-.01em}
-.sub{color:var(--muted);margin:4px 0 0}
-nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-nav div{max-width:760px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
-nav a{flex:none;text-decoration:none;color:var(--ink);font-size:.9rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
-main{max-width:760px;margin:0 auto;padding:8px 16px 48px}
-section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0;scroll-margin-top:64px}
-h2{margin:0 0 10px;font-size:1.2rem}
-h3{margin:16px 0 6px;font-size:1rem;color:var(--accent)}
-p{margin:0 0 10px}
-ul,ol{margin:0 0 10px;padding-left:20px}
-li{margin:3px 0}
-.today{background:var(--accent-soft);border-radius:10px;padding:12px 14px;margin-bottom:6px}
-.today b{color:var(--accent)}
-.row{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 8px;border-bottom:1px solid var(--line);border-radius:8px}
-.row:last-child{border-bottom:0}
-.row .t{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.92rem}
-.row .g{display:block;color:var(--muted);font-size:.85rem}
-.row.now{background:var(--now)}
-.row.now .t{color:var(--now-ink);font-weight:600}
-.day{border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0}
-.day.is-today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-.day .h{display:flex;justify-content:space-between;align-items:center;font-weight:600}
-.tag{font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
-.tag.off{background:transparent;color:var(--muted);border:1px solid var(--line)}
-.day dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.93rem}
-.day dt{color:var(--muted)}
-.day dd{margin:0}
-.flow{font-weight:600;color:var(--accent)}
-.check li{list-style:none;margin-left:-20px}
-.check input{margin-right:8px;accent-color:var(--accent)}
-footer{color:var(--muted);font-size:.8rem;text-align:center;padding:0 16px 32px}
+:root{
+  --bg:#0f1412;--panel:#18201d;--panel2:#1f2925;--ink:#eef3f0;--muted:#8fa29a;--line:#2a3631;
+  --cross:#f08a4b;--musc:#5aa9e6;--eng:#7ccf9f;--sleep:#8e86d9;--rest:#c7b37a;--work:#6c7a74;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{height:100vh;display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto minmax(0,1fr) auto;gap:14px;padding:18px}
+header{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.clock{font-size:clamp(44px,6vw,72px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.date{font-size:clamp(17px,2vw,24px);color:var(--muted)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:20px;min-height:0;overflow:auto}
+.label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.now{display:flex;flex-direction:column;gap:10px}
+.now>*{flex:none}
+.now .title{font-size:clamp(28px,3.6vw,44px);font-weight:700;line-height:1.1}
+.now .time{font-size:clamp(18px,2vw,24px);color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{flex:none;height:12px;border-radius:99px;background:var(--panel2);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--c,var(--eng));transition:width .6s}
+.left-note{font-size:18px;color:var(--muted)}
+.next{border-top:1px solid var(--line);padding-top:14px;display:flex;gap:12px;align-items:center}
+.next b{font-size:20px}
+.dot{width:14px;height:14px;border-radius:50%;flex:none;background:var(--c)}
+.focus{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.chip{background:var(--panel2);border-radius:16px;padding:14px 16px;border-left:6px solid var(--c)}
+.chip .k{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.chip .v{font-size:18px;font-weight:600;margin-top:4px}
+.side{display:flex;flex-direction:column;gap:6px;overflow:auto}
+.row{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;padding:6px 10px;border-radius:10px}
+.row .t{font-variant-numeric:tabular-nums;color:var(--muted);font-size:15px}
+.row .a{display:flex;align-items:center;gap:10px;font-size:16px}
+.row.past{opacity:.38}
+.row.cur{background:var(--panel2);box-shadow:inset 4px 0 0 var(--c)}
+.row.cur .t{color:var(--ink);font-weight:700}
+.list{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:15px}
+.list div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:4px 0}
+.list span{color:var(--muted);white-space:nowrap}
+.week{grid-column:1/-1;display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.day.today{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.day .d{font-weight:700;font-size:15px}
+.day .tr{font-size:14px;font-weight:600;color:var(--c)}
+.day .en{font-size:13px;color:var(--muted)}
+.btn{background:var(--panel2);color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}
+.btn.on{color:var(--eng);border-color:var(--eng)}
+@media (max-width:820px){.wrap{grid-template-columns:1fr;height:auto}.panel{overflow:visible}.week{grid-template-columns:repeat(2,1fr)}.week .day:last-child{grid-column:1/-1}}
+body.poster .now-panel,body.poster .side-panel,body.poster .btn,body.poster .clock,body.poster .date{display:none}
+body.poster .wrap{grid-template-rows:auto auto auto;height:auto}
+body.poster .week{align-items:stretch}
+body.poster .day{padding:16px;gap:10px}
+body.poster .day .d{font-size:22px}
+.ptitle{display:none;font-size:34px;font-weight:700}
+body.poster .ptitle{display:block}
+body.poster .poster-legend{display:flex}
+.pblk{border-left:4px solid var(--c);padding:2px 0 2px 10px}
+.pblk .k{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.pblk .v{font-size:16px;font-weight:600;margin-top:2px}
+.pfi{font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:3px;margin-top:2px}
+.pfi div{display:flex;justify-content:space-between;gap:6px;border-bottom:1px dashed var(--line);padding-bottom:2px}
+.poster-legend{display:none;grid-column:1/-1;gap:22px;color:var(--muted);font-size:16px;flex-wrap:wrap}
+.poster-legend span{display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
-<header>
-  <h1>Rotina e Estudos</h1>
-  <p class="sub">Turno noturno · sono logo ao chegar · academia à tarde · inglês em casa</p>
-</header>
-<nav><div>
-  <a href="#hoje">Hoje</a><a href="#rotina">Rotina</a><a href="#semana">Semana</a><a href="#python">Python</a><a href="#trajetos">Trajetos</a><a href="#sono">Sono e treino</a><a href="#comecar">Como começar</a><a href="#domingo">Domingo</a>
-</div></nav>
-<main>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="ptitle">Minha semana</div>
+      <div class="clock" id="clock">--:--</div>
+      <div class="date" id="date"></div>
+    </div>
+    <button class="btn" id="wake">Manter tela ligada</button>
+  </header>
 
-<section id="hoje">
-  <h2>Hoje</h2>
-  <div class="today" id="todayBox"></div>
-</section>
+  <section class="panel now now-panel">
+    <div class="label">Agora</div>
+    <div class="title" id="nowTitle"></div>
+    <div class="time" id="nowTime"></div>
+    <div class="bar"><i id="nowBar"></i></div>
+    <div class="left-note" id="nowLeft"></div>
+    <div class="focus" id="focus"></div>
+    <div class="next" id="next"></div>
+    <div id="extra"></div>
+  </section>
 
-<section id="rotina">
-  <h2>Rotina diária</h2>
-  <p>Nos dias sem treino (quarta, sábado e domingo), o horário da academia fica livre para descanso.</p>
-  <div id="routine"></div>
-</section>
+  <section class="panel side side-panel">
+    <div class="label" id="sideLabel">Hoje</div>
+    <div id="timeline"></div>
+  </section>
 
-<section id="semana">
-  <h2>Plano semanal</h2>
-  <p>Em casa, o estudo profundo é todo de inglês, com uma habilidade por dia. Python fica para as horas livres no trabalho.</p>
-  <div id="week"></div>
-  <p>Todo dia: listening em inglês no trajeto. Os flashcards da volta podem misturar vocabulário de inglês e conceitos de Python.</p>
-  <p><b>Meta de inglês:</b> fazer um teste de nível agora (o EF SET é gratuito e online) e repetir a cada dois meses.</p>
-</section>
-
-<section id="python">
-  <h2>Trilha de Python</h2>
-  <p>Nas horas livres do trabalho, em rodízio: <span class="flow">POO → FastAPI → Banco de dados → IA → Projeto</span>. A cada noite com tempo livre, estude o próximo tema, a partir do tópico onde parou.</p>
-  <h3>POO</h3>
-  <ol><li>Classes, atributos e métodos</li><li>Encapsulamento e propriedades</li><li>Herança e composição</li><li>Dataclasses e type hints</li><li>Organizar o código do projeto em classes e módulos</li></ol>
-  <h3>FastAPI</h3>
-  <ol><li>Rotas, parâmetros e respostas</li><li>Validação com Pydantic</li><li>Organização em routers</li><li>Injeção de dependências</li><li>Tratamento de erros e testes com pytest</li></ol>
-  <h3>Banco de dados</h3>
-  <ol><li>SQL básico: SELECT, JOIN, GROUP BY</li><li>Modelagem de tabelas</li><li>SQLAlchemy (modelos e sessões)</li><li>Migrações com Alembic</li><li>Conectar o banco às rotas da API</li></ol>
-  <h3>IA</h3>
-  <ol><li>Chamar uma API de LLM a partir do Python</li><li>Prompts estruturados e saída em JSON</li><li>Embeddings e busca por similaridade</li><li>RAG simples sobre seus próprios documentos</li><li>Expor a IA como um endpoint da API</li></ol>
-  <h3>Projeto</h3>
-  <p>Juntar o que foi estudado nos temas anteriores num projeto real, como o Sherlock ou o Polaris.</p>
-</section>
-
-<section id="trajetos">
-  <h2>Trajetos</h2>
-  <h3>Volta (manhã)</h3>
-  <ol><li>Flashcards nos primeiros 20 a 25 minutos, enquanto ainda está alerta.</li><li>Depois, inglês em áudio ou descanso, conforme o cansaço.</li></ol>
-  <h3>Ida (noite)</h3>
-  <ul><li>Livre: listening de inglês, aula em vídeo de Python ou descanso.</li></ul>
-  <p><b>Ferramentas:</b> plugin Spaced Repetition do Obsidian ou Anki. Baixe áudios e vídeos antes, para não depender de sinal.</p>
-</section>
-
-<section id="sono">
-  <h2>Sono e treino</h2>
-  <ul>
-    <li><b>Escuro e silêncio:</b> cortina blackout ou máscara, tampão de ouvido, celular no silencioso.</li>
-    <li><b>Cafeína:</b> cortar nas últimas 5 a 6 horas do turno.</li>
-    <li><b>Chegada:</b> ir direto para o quarto depois do lanche, sem ficar no celular.</li>
-    <li><b>Lanche pré-treino:</b> comer algo leve ao acordar para não treinar em jejum.</li>
-    <li><b>Refeição pós-treino:</b> completa, é ela que sustenta o estudo e o início do turno.</li>
-    <li><b>Folgas:</b> manter o horário de sono o mais próximo possível do normal.</li>
-  </ul>
-</section>
-
-<section id="comecar">
-  <h2>Como começar</h2>
-  <ul>
-    <li><b>Comece pela metade:</b> nas duas primeiras semanas, 3 treinos e cerca de 45 min de estudo.</li>
-    <li><b>Versão mínima:</b> em dia ruim, só os flashcards no trajeto já contam.</li>
-    <li><b>O sono vem primeiro:</b> se dormiu mal, corte o treino ou o estudo, nunca o sono.</li>
-    <li><b>Refeições prontas:</b> prepare no fim de semana.</li>
-    <li><b>Mochila da academia pronta na véspera.</b></li>
-    <li><b>Fim de semana protegido:</b> sábado é descanso de verdade, sem culpa.</li>
-    <li><b>Avaliação em duas semanas:</b> está acordando descansado? O estudo rende? Ajuste.</li>
-  </ul>
-</section>
-
-<section id="domingo">
-  <h2>Revisão de domingo</h2>
-  <ul class="check" id="checklist"></ul>
-</section>
-</main>
-<footer>Atualizado em 13/10/2026</footer>
+  <div class="poster-legend">
+    <span><i class="dot" style="--c:var(--cross)"></i>Cross training 17:00 – 18:00</span>
+    <span><i class="dot" style="--c:var(--musc)"></i>Musculação 17:00 – 18:00</span>
+    <span><i class="dot" style="--c:var(--eng)"></i>Inglês 18:30 – 19:40</span>
+    <span><i class="dot" style="--c:var(--sleep)"></i>Sono 09:00 – 16:00</span>
+    <span><i class="dot" style="--c:var(--muted)"></i>Saída para o trabalho 19:45</span>
+  </div>
+  <div class="week" id="week"></div>
+</div>
 
 <script>
-const routine=[
- ["Volta (~1h30)","Flashcards (20–25 min) + inglês em áudio ou descanso","Revisão e fixação",null],
- ["08:20 – 09:00","Chegada, lanche leve, quarto escuro","Preparar o sono",[500,540]],
- ["09:00 – 16:00","Sono (7h)","Descanso",[540,960]],
- ["16:00 – 16:30","Acordar, café e lanche pré-treino","Despertar",[960,990]],
- ["16:30 – 17:45","Academia (Seg/Ter/Qui/Sex)","Saúde e disposição",[990,1065]],
- ["17:45 – 18:15","Banho e refeição","Recuperação",[1065,1095]],
- ["18:15 – 19:40","Estudo de inglês (1h25)","Aprendizado",[1095,1180]],
- ["19:40 – 19:45","Resumo do dia no Obsidian","Fixação",[1180,1185]],
- ["19:45 – 20:30","Jantar e saída para o trabalho","Preparação",[1185,1230]],
- ["Ida (~1h30)","Aula em vídeo de Python, inglês ou descanso","Uso livre",null]
+const WEEK=[ // 0 = domingo
+ {d:"Domingo",tr:"Descanso",type:"rest",en:"Revisão da semana (30 min)"},
+ {d:"Segunda",tr:"Cross training",type:"cross",en:"Vocabulário + gramática"},
+ {d:"Terça",tr:"Musculação A",type:"musc",en:"Listening com transcrição"},
+ {d:"Quarta",tr:"Cross training",type:"cross",en:"Speaking com outra pessoa"},
+ {d:"Quinta",tr:"Musculação B",type:"musc",en:"Reading + writing"},
+ {d:"Sexta",tr:"Cross training",type:"cross",en:"Speaking sozinho + revisão"},
+ {d:"Sábado",tr:"Descanso",type:"rest",en:"Livre"}
 ];
-const week=[ // index 0 = domingo
- {d:"Domingo",t:false,en:"Revisão geral, flashcards e planejamento",py:"—"},
- {d:"Segunda",t:true,en:"Vocabulário + gramática",py:"POO"},
- {d:"Terça",t:true,en:"Listening: série ou podcast com transcrição, shadowing",py:"FastAPI"},
- {d:"Quarta",t:false,en:"Speaking com outra pessoa: aula ou parceiro de conversação",py:"Banco de dados"},
- {d:"Quinta",t:true,en:"Reading + writing: texto curto e um parágrafo escrito",py:"IA"},
- {d:"Sexta",t:true,en:"Speaking sozinho (gravar-se falando) + revisão da semana",py:"Projeto prático"},
- {d:"Sábado",t:false,en:"Conversação leve ou descanso",py:"—"}
-];
-const checks=["Revisar os flashcards pendentes","Reler os resumos diários no Obsidian","Anotar em que ponto parou no rodízio de Python","Definir os tópicos de inglês da próxima semana","Anotar o progresso de inglês da semana","Avaliar o sono: acordou descansado na maioria dos dias?"];
+const FICHA={
+ A:[["Leg press","3 × 12"],["Supino na máquina","3 × 10"],["Puxada frontal","3 × 10"],["Cadeira flexora","3 × 12"],["Elevação lateral","3 × 12"],["Prancha","3 × 20–30 s"],["Bike ou esteira","10–15 min"]],
+ B:[["Cadeira extensora","3 × 12"],["Remada baixa","3 × 10"],["Desenvolvimento","3 × 10"],["Elevação pélvica","3 × 12"],["Rosca direta","3 × 12"],["Tríceps na polia","3 × 12"],["Abdominal máquina","3 × 15"],["Bike ou esteira","10–15 min"]]
+};
+const C={cross:"var(--cross)",musc:"var(--musc)",eng:"var(--eng)",sleep:"var(--sleep)",rest:"var(--rest)",work:"var(--work)",other:"var(--muted)"};
+const m=(h,mi)=>h*60+mi;
+function dayBlocks(w){
+  return [
+   [0,m(6,50),"Trabalho","work"],
+   [m(6,50),m(8,20),"Volta: flashcards (15 min) e descanso","eng"],
+   [m(8,20),m(9,0),"Chegada, lanche leve, quarto escuro","other"],
+   [m(9,0),m(16,0),"Sono","sleep"],
+   [m(16,0),m(16,40),"Acordar, café e lanche pré-treino","other"],
+   [m(16,40),m(17,0),"Ida ao treino","other"],
+   [m(17,0),m(18,0),w.tr,w.type],
+   [m(18,0),m(18,30),"Volta, banho e refeição","other"],
+   [m(18,30),m(19,40),"Inglês: "+w.en,"eng"],
+   [m(19,40),m(20,30),"Jantar e saída (levar a comida do turno)","other"],
+   [m(20,30),m(22,0),"Ida: listening ou descanso","eng"],
+   [m(22,0),m(24,0),"Trabalho","work"]
+  ];
+}
+function weekendBlocks(dow){
+  const b=[[0,m(24,0),"Descanso e compromissos sociais","rest"]];
+  if(dow===0)b.splice(0,1,[0,m(18,0),"Descanso e compromissos sociais","rest"],[m(18,0),m(18,30),"Revisão da semana e pesagem","eng"],[m(18,30),m(24,0),"Descanso","rest"]);
+  return b;
+}
+const fmt=x=>String(Math.floor(x/60)%24).padStart(2,"0")+":"+String(x%60).padStart(2,"0");
 const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-const now=new Date(),mins=now.getHours()*60+now.getMinutes(),dow=now.getDay();
-document.getElementById("routine").innerHTML=routine.map(r=>{
- const on=r[3]&&mins>=r[3][0]&&mins<r[3][1];
- return `<div class="row${on?" now":""}"><span class="t">${r[0]}</span><span>${esc(r[1])}<span class="g">${r[2]}${on?" · agora":""}</span></span></div>`}).join("");
-const order=[1,2,3,4,5,6,0];
-document.getElementById("week").innerHTML=order.map(i=>{const w=week[i];
- return `<div class="day${i===dow?" is-today":""}"><div class="h"><span>${w.d}${i===dow?" (hoje)":""}</span><span class="tag${w.t?"":" off"}">${w.t?"Treino":"Sem treino"}</span></div><dl><dt>Inglês</dt><dd>${esc(w.en)}</dd><dt>Python</dt><dd>${esc(w.py)}</dd></dl></div>`}).join("");
-const w=week[dow];
-document.getElementById("todayBox").innerHTML=`<b>${w.d}</b> · ${w.t?"Academia 16:30 – 17:45":"Sem treino"}<br>Inglês: ${esc(w.en)}<br>Python no trabalho: ${esc(w.py)}`;
-let saved={};try{saved=JSON.parse(localStorage.getItem("checks")||"{}")}catch(e){}
-const ul=document.getElementById("checklist");
-ul.innerHTML=checks.map((c,i)=>`<li><label><input type="checkbox" data-i="${i}"${saved[i]?" checked":""}>${c}</label></li>`).join("");
-ul.addEventListener("change",e=>{saved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("checks",JSON.stringify(saved))}catch(err){}});
+
+function render(){
+  const now=new Date(),dow=now.getDay(),mins=now.getHours()*60+now.getMinutes();
+  const w=WEEK[dow],weekend=(dow===0||dow===6);
+  document.getElementById("clock").textContent=fmt(mins);
+  const ds=now.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"});document.getElementById("date").textContent=ds.charAt(0).toUpperCase()+ds.slice(1);
+  const blocks=weekend?weekendBlocks(dow):dayBlocks(w);
+  let i=blocks.findIndex(b=>mins>=b[0]&&mins<b[1]);if(i<0)i=0;
+  const cur=blocks[i],nx=blocks[i+1];
+  const pct=Math.round((mins-cur[0])/(cur[1]-cur[0])*100),left=cur[1]-mins;
+  document.getElementById("nowTitle").textContent=cur[2];
+  document.getElementById("nowTime").textContent=fmt(cur[0])+" – "+fmt(cur[1]);
+  const bar=document.getElementById("nowBar");bar.style.width=pct+"%";bar.style.setProperty("--c",C[cur[3]]);
+  document.getElementById("nowLeft").textContent=left>=60?`Faltam ${Math.floor(left/60)}h${String(left%60).padStart(2,"0")}`:`Faltam ${left} min`;
+  document.getElementById("next").innerHTML=nx?`<i class="dot" style="--c:${C[nx[3]]}"></i><div><div class="label">Depois, às ${fmt(nx[0])}</div><b>${esc(nx[2])}</b></div>`:"";
+  document.getElementById("focus").innerHTML=weekend?
+    `<div class="chip" style="--c:${C.rest}"><div class="k">Hoje</div><div class="v">Descanso</div></div><div class="chip" style="--c:${C.eng}"><div class="k">Inglês</div><div class="v">${esc(w.en)}</div></div>`:
+    `<div class="chip" style="--c:${C[w.type]}"><div class="k">Treino 17:00</div><div class="v">${esc(w.tr)}</div></div><div class="chip" style="--c:${C.eng}"><div class="k">Inglês 18:30</div><div class="v">${esc(w.en)}</div></div>`;
+  document.getElementById("timeline").innerHTML=blocks.filter(b=>b[1]-b[0]>0).map((b,j)=>
+    `<div class="row ${j<i?"past":j===i?"cur":""}" style="--c:${C[b[3]]}"><span class="t">${fmt(b[0])}</span><span class="a"><i class="dot" style="--c:${C[b[3]]}"></i>${esc(b[2])}</span></div>`).join("");
+  let extra="";
+  if(w.type==="musc"){const k=w.tr.slice(-1);extra=`<div class="label" style="margin-top:4px">Ficha do treino ${k}</div><div class="list">${FICHA[k].map(f=>`<div>${f[0]}<span>${f[1]}</span></div>`).join("")}</div>`;}
+  else if(w.type==="cross"){extra=`<div class="label" style="margin-top:4px">Lembrete do cross</div><div class="left-note" style="margin-top:6px">Peça as versões adaptadas (sem salto, menos carga). Dor na articulação: pare e avise o coach.</div>`;}
+  else if(dow===0){extra=`<div class="label" style="margin-top:4px">Revisão de domingo</div><div class="left-note" style="margin-top:6px">Flashcards pendentes · tópicos de inglês · peso e cintura · agendar as aulas da semana</div>`;}
+  document.getElementById("extra").innerHTML=extra;
+  const order=[1,2,3,4,5,6,0],poster=document.body.classList.contains("poster");
+  document.getElementById("week").innerHTML=order.map(k=>{const x=WEEK[k];
+    if(!poster)return `<div class="day ${k===dow?"today":""}" style="--c:${C[x.type]}"><div class="d">${x.d}</div><div class="tr">${esc(x.tr)}</div><div class="en">${esc(x.en)}</div></div>`;
+    const wk=(k===0||k===6);
+    let h=`<div class="day" style="--c:${C[x.type]}"><div class="d">${x.d}</div>`;
+    if(wk){h+=`<div class="pblk" style="--c:${C.rest}"><div class="k">Dia todo</div><div class="v">Descanso e compromissos sociais</div></div>`;
+      if(k===0)h+=`<div class="pblk" style="--c:${C.eng}"><div class="k">30 min</div><div class="v">Revisão da semana</div></div><div class="pfi"><div>Flashcards pendentes</div><div>Tópicos de inglês</div><div>Peso e cintura</div><div>Agendar as aulas</div></div>`;
+    }else{
+      h+=`<div class="pblk" style="--c:${C[x.type]}"><div class="k">17:00 – 18:00</div><div class="v">${esc(x.tr)}</div></div>`;
+      if(x.type==="musc")h+=`<div class="pfi">${FICHA[x.tr.slice(-1)].map(f=>`<div>${f[0]}<span>${f[1]}</span></div>`).join("")}</div>`;
+      else h+=`<div class="pfi"><div>Versões adaptadas, sem salto</div></div>`;
+      h+=`<div class="pblk" style="--c:${C.eng}"><div class="k">18:30 – 19:40 · Inglês</div><div class="v">${esc(x.en)}</div></div>`;
+    }
+    return h+`</div>`}).join("");
+}
+if(new URLSearchParams(location.search).get("modo")==="semana")document.body.classList.add("poster");
+render();setInterval(render,30000);
+
+let lock=null;const wb=document.getElementById("wake");
+wb.onclick=async()=>{try{if(lock){await lock.release();lock=null;wb.classList.remove("on");wb.textContent="Manter tela ligada";return}
+  lock=await navigator.wakeLock.request("screen");wb.classList.add("on");wb.textContent="Tela ligada";
+  lock.addEventListener("release",()=>{lock=null;wb.classList.remove("on");wb.textContent="Manter tela ligada"})}catch(e){wb.textContent="Não suportado aqui"}};
+document.addEventListener("visibilitychange",async()=>{if(wb.classList.contains("on")&&!lock&&document.visibilityState==="visible"){try{lock=await navigator.wakeLock.request("screen")}catch(e){}}});
 </script>
 </body>
 </html>
